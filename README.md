@@ -8,6 +8,10 @@ This project connects a Streamlit user interface to the Ollama Python client. Wh
 
 The application is intentionally small and easy to extend. It is suitable for experimenting with local language models, building a private personal assistant, or using as a starting point for a more capable AI application.
 
+##  Screenshots
+
+![](.screenShot1.png)
+
 ## Features
 
 - Chat with locally hosted Ollama models from a web browser.
