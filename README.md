@@ -10,7 +10,7 @@ The application is intentionally small and easy to extend. It is suitable for ex
 
 ##  Screenshots
 
-![](.screenShot1.png)
+![](./screenShot1.png)
 
 ## Features
 
