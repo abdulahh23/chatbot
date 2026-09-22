@@ -1,7 +1,6 @@
 import streamlit as st
 import ollama
 
-# Page configuration
 st.set_page_config(
     page_title="Ollama Local Chatbot",
     page_icon="🤖",
@@ -11,14 +10,11 @@ st.set_page_config(
 st.title("🤖 Ollama Local Chatbot")
 st.markdown("Chat with your local AI models using Streamlit and Ollama.")
 
-# Sidebar for configuration
 with st.sidebar:
     st.header("Settings")
 
-    # Get list of available models from Ollama
     try:
         models_info = ollama.list()
-        # Extract model names from the response
         available_models = [model['name'] for model in models_info['models']]
     except Exception as e:
         st.error(f"Could not connect to Ollama: {e}")
@@ -34,29 +30,22 @@ with st.sidebar:
         st.session_state.messages = []
         st.rerun()
 
-# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# React to user input
 if prompt := st.chat_input("What is on your mind?"):
-    # Display user message in chat message container
     st.chat_message("user").markdown(prompt)
-    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    # Display assistant response in chat message container
     with st.chat_message("assistant"):
         response_placeholder = st.empty()
         full_response = ""
 
         try:
-            # Call Ollama with streaming enabled
             stream = ollama.chat(
                 model=selected_model,
                 messages=st.session_state.messages,
@@ -69,7 +58,6 @@ if prompt := st.chat_input("What is on your mind?"):
 
             response_placeholder.markdown(full_response)
 
-            # Add assistant response to chat history
             st.session_state.messages.append({"role": "assistant", "content": full_response})
 
         except Exception as e:
